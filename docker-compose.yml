@@ -1,0 +1,6 @@
+services:
+  scraper:
+    build: .
+    command: python scraper/main.py
+    volumes:
+      - ./scraper:/app/scraper
