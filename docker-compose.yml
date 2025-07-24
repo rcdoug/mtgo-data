@@ -3,6 +3,5 @@ services:
   scraper:
     tty: true
     build: .
-    command: ["python", "scraper/main.py"]
     volumes:
       - ./scraper:/app/scraper

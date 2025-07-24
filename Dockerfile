@@ -12,7 +12,8 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the scraper code into the container
 COPY ./scraper /app/scraper
+COPY .env /app/
 
 # Tell Docker the command to run when the container starts
 # We will override this in docker-compose, but it's good practice
-CMD ["python", "scraper/main.py"]
+# CMD ["python", "scraper/main.py"]
