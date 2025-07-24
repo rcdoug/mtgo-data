@@ -5,7 +5,7 @@ import requests
 import re
 from bs4 import BeautifulSoup
 
-import scraper.dbops as dbops
+import dbops
 
 def run_scraper():
     url = 'https://www.mtgo.com/decklist/pauper-challenge-32-2025-06-2912800016'
@@ -57,6 +57,11 @@ def parse_local():
     df = pd.DataFrame(row_list)
     print(df)
 
+    player_list = df['username'].tolist()
+    print(player_list)
+    player_map = dbops.get_player_ids(player_list)
+    print(player_map)
+
     return
 
 def parse_event_details(soup, url):
@@ -95,4 +100,3 @@ def get_name_and_num(entry):
 
 if __name__ == "__main__":
     parse_local()
-    print(dbops.write_entry())
