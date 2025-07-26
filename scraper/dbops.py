@@ -60,12 +60,12 @@ def insert_event(format_id, event_type_id, date, entries, mtgo_event_id):
 
     return
 
-def get_event_by_mtgo_id(mtgo_event_id):
+def get_event_by_mtgo_id(mtgo_event_id: int) -> int:
     """Used to retrieve an event using the mtgo_event_id."""
     event_id = 0
     return event_id
 
-def insert_deck(event_id, player_id, archetype_id, placement):
+def insert_deck(event_id: int, player_id: int, archetype_id: int, placement: int) -> int:
     """Inserts a deck into decks table.
 
     :event_id: int, references events table. Can't be NULL

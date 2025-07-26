@@ -40,6 +40,7 @@ def parse_local():
     # soup.find_all returns bs4.element.ResultSet
     for decklist in soup.find_all("section", class_="decklist"):
         # decklist is of type bs4.element.Tag
+
         row_entry = {}
         playerStringPartition = decklist.find("p", class_="decklist-player").get_text().partition(" ")
 
@@ -55,16 +56,15 @@ def parse_local():
         row_list.append(row_entry)
     
     df = pd.DataFrame(row_list)
-    print(df)
-
     player_list = df['username'].tolist()
-    print(player_list)
     player_map = dbops.get_player_ids(player_list)
-    print(player_map)
+    df['player_id'] = player_map[df['username']]
+    print(df)
 
     return
 
-def parse_event_details(soup, url):
+def parse_event_details(soup, url: str):
+
     playerCount = int(soup.find("h2", class_="decklist-player-count").get_text().partition(" ")[0])
     datePosted = soup.find("p", class_="decklist-posted-on").get_text().partition(" ")[2].partition(" ")[2]
     date_obj = datetime.strptime(datePosted, "%B %d, %Y")
